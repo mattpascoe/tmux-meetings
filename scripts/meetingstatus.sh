@@ -86,7 +86,7 @@ multi_menu() {
 }
 
 print_meeting_status() {
-  local IN_MEETING_ICON=$(get_tmux_option @meetings-inmeeting-icon "󰤙 ")
+  #local IN_MEETING_ICON=$(get_tmux_option @meetings-inmeeting-icon "󰤙 ")
   local ALMOST_MEETING_COLOR=$(get_tmux_option @meetings-almostmeeting-color "#f9e2af")
   local IN_MEETING_COLOR=$(get_tmux_option @meetings-inmeeting-color "#a6e3a1")
   local FREE_ICON=$(get_tmux_option @meetings-free-icon "󱁕")
@@ -154,7 +154,7 @@ main() {
   fi
   EXCLUDE_CALS=$(get_tmux_option @meetings-exclude-cals "")
   CURRENT_TIME=$(TZ=$TIMEZN date +%s)
-  local CHECK_INTERVAL=$(get_tmux_option @meetings-check-interval 10)
+  local CHECK_INTERVAL=$(get_tmux_option @meetings-check-interval 60)
   # These two variables only store context to ensure we process at the interval
   local LAST_CHECK=$(get_tmux_option @meetings-last-check)
   local LAST_MSG=$(get_tmux_option @meetings-current-text)
