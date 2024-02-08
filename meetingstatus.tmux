@@ -30,12 +30,12 @@ main() {
   update_tmux_option "status-left"
 }
 
-# Display calendar TODO make this a configurable option
-CALBINDKEY=$(get_tmux_option @meeting-status-calendar-bindkey "C-c")
+# Setup a keybinding to popup the year calendar
+CALBINDKEY=$(get_tmux_option @meetings-calendar-bindkey "C-c")
 bind-key "$CALBINDKEY" run-shell "tmux display-popup -w68 -h40 -T 'This years Calendar' cal $(date +%Y)"
 
 # Setup a keybinding to popup the meeting list
-SUMMARYBINDKEY=$(get_tmux_option @meeting-status-summary-bindkey "C-m")
+SUMMARYBINDKEY=$(get_tmux_option @meetings-summary-bindkey "C-m")
 bind-key "$SUMMARYBINDKEY" run-shell "tmux display-popup -S -w50% -h75% -T 'Todays Meeting Info' $CURRENT_DIR/scripts/daily_summary_popup.sh"
 
 main

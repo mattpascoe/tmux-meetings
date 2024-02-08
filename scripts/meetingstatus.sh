@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 #
 #TODO:
-#  echo $(( ($( TZ=$TIMEZN date -j -f "%T" "13:45:00" +%s) - $(TZ=$TIMEZN date +%s))/60+1 ))
 #  use the dispaly-menu option to list all the meetings happening now/today?
-
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$CURRENT_DIR/helpers.sh"
@@ -77,7 +75,6 @@ format_multi_entry() {
 }
 # tmux display-menu -xR -yS '20:40:00 #[underscore]test event' '' bar '21:00:00 #[underscore]test2' '' foo
 
-
 multi_menu() {
   for entry in "$@"; do
     formatted_entries+=("$(format_multi_entry "$entry")")
@@ -87,8 +84,6 @@ multi_menu() {
   #Also is there a way to take mouse clicks on the status section?
   #eval "tmux display-menu -xR -yS '$(TZ=$TIMEZN date)' '' date '' $formatted_entries_str"
 }
-
-
 
 print_meeting_status() {
   local IN_MEETING_ICON=$(get_tmux_option @meetings-inmeeting-icon "󰤙 ")
@@ -107,13 +102,11 @@ print_meeting_status() {
   local SHOWCLOCK=$(get_tmux_option @meetings-show-clock 1)
   if [[ $SHOWCLOCK -eq 1 ]]; then
     local CLOCKFMT="$(get_tmux_option @meetings-clock-format "%a %m/%d %I:%M")"
-    local CLOCK=" #[fg=#ffffff]$(TZ=$TIMEZN date +"$CLOCKFMT")"
+    local CLOCK=" #[fg=#default]$(TZ=$TIMEZN date +"$CLOCKFMT")"
   fi
 
-  # TODO need to test end time so we only show details if the meeting is in progress and X time before
-  #if [[ $MINUTES_FROM_START -lt $ALERT_IF_IN_NEXT_MINUTES && $MINUTES_FROM_START -gt -100 ]]; then
+  # Show details if the meeting is in progress and X time before
   if [[ $MINUTES_FROM_START -gt -100 && $MINUTES_FROM_START -lt $ALERT_IF_IN_NEXT_MINUTES || $MINUTES_FROM_START -eq $ALERT_IF_IN_NEXT_MINUTES ]]; then
-  #if (( $MINUTES_FROM_START <= $ALERT_IF_IN_NEXT_MINUTES )); then
     # If the meeting is about to start or has started
     if (( $MINUTES_FROM_START > 0 )); then
       MEETING_COLOR=$ALMOST_MEETING_COLOR
@@ -140,7 +133,7 @@ print_meeting_status() {
   # during the check interval
   set_tmux_option "@meetings-current-text" "$CUR_MSG"
 
-  #TODO: currently this will popup at the time of the meeting
+  # Popup if the meeting is about to start based on ALERT_POPUP_BEFORE_SECONDS
   if [[ $EPOC_DIFF -gt $ALERT_POPUP_BEFORE_SECONDS && $EPOC_DIFF -lt $ALERT_POPUP_BEFORE_SECONDS+10 ]]; then
     display_popup
   fi

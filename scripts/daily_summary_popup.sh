@@ -5,7 +5,7 @@
 # binding. You can set @meeting-status-meeting-summary-bindkey "C-m" for
 # example.
 
-# TODO: have a config option to display calendar or not, some screens may be
+# TODO: Maybe have a config option to display calendar or not, some screens may be
 # too small to show it and the summary
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
