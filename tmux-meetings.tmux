@@ -9,12 +9,12 @@
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$CURRENT_DIR/scripts/helpers.sh"
 
-meeting_status_details="#($CURRENT_DIR/scripts/meetingstatus.sh)"
-meeting_status_details_interpolation_string="\#{meetingstatus}"
+meetings_details="#($CURRENT_DIR/scripts/meetingstatus.sh)"
+meetings_details_interpolation_string="\#{meetings}"
 
 do_interpolation() {
   local string="$1"
-  local interpolated="${string/$meeting_status_details_interpolation_string/$meeting_status_details}"
+  local interpolated="${string/$meetings_details_interpolation_string/$meetings_details}"
   echo "$interpolated"
 }
 

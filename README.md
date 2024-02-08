@@ -25,19 +25,17 @@ set -g @plugin 'mattpascoe/tmux-meetings'
 Then press `prefix` + `I` to install the plugin.
 
 
-
-
 ## Catppuccin Option
 If you are using the Catppuccin TMUX theme, you can add the following to a file in the `custom` directory
-such as `~/.tmux/plugins/tmux/custom/tmux-meetings.sh`
+such as `~/.tmux/plugins/tmux/custom/meetings.sh`
 
 ```sh
 # Requires tmux-meetings plugin
-show_meetingstatus() {
+show_meetings() {
   local index=$1
   local icon="$(get_tmux_option "@catppuccin_meetings_icon" "󰃰")"
   local color="$(get_tmux_option "@catppuccin_meetings_color" "$thm_blue")"
-  local text="$(get_tmux_option "@catppuccin_meetings_text" "#{meetingstatus}")"
+  local text="$(get_tmux_option "@catppuccin_meetings_text" "#{meetings}")"
 
   local module=$( build_status_module "$index" "$icon" "$color" "$text" )
 
@@ -48,7 +46,7 @@ show_meetingstatus() {
 Then add the following to your `@catppuccin_status_modules_right` option in your tmux.conf for example.
 
 ```sh
-set -g @catppuccin_status_modules_right "directory meetingstatus"
+set -g @catppuccin_status_modules_right "directory meetings"
 ```
 
 
