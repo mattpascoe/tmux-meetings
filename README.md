@@ -32,6 +32,7 @@ If you are using the Catppuccin TMUX theme, you can add the following to a file 
 such as `~/.tmux/plugins/tmux/custom/tmux-meetings.sh`
 
 ```sh
+# Requires tmux-meetings plugin
 show_meetingstatus() {
   local index=$1
   local icon="$(get_tmux_option "@catppuccin_meetings_icon" "󰃰")"
