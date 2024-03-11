@@ -152,6 +152,9 @@ main() {
     echo "icalBuddy not installed."
     return 0
   fi
+  # Pick up system timezone as default, this allows us to control the timezone
+  # we want to calculate everything with
+  local TIMEZN=$(get_tmux_option @meetings-timezone $(date +%Z))
   EXCLUDE_CALS=$(get_tmux_option @meetings-exclude-cals "")
   CURRENT_TIME=$(TZ=$TIMEZN date +%s)
   local CHECK_INTERVAL=$(get_tmux_option @meetings-check-interval 60)
@@ -160,9 +163,6 @@ main() {
   local LAST_MSG=$(get_tmux_option @meetings-current-text)
   # Difference between current time and last execution time
   local TIME_DIFF=$((CURRENT_TIME - LAST_CHECK))
-  # Pick up system timezone as default, this allows us to control the timezone
-  # we want to calculate everything with
-  local TIMEZN=$(get_tmux_option @meetings-timezone $(date +%Z))
 
   # If we are past the check interval update the status
   # Otherwise just keep the last message text
